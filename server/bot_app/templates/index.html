@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        h1{
+            text-align: center;
+            color: black;
+        }
+        .queryBox{
+            text-align: center;
+            color: green;
+        }
+        .answerbox{
+            text-align: center;
+            color: black;
+        }
+    </style>
+    <title>Chat Bot</title>
+
+</head>
+<body>
+    <h1>Ask away</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="queryBox">
+            <input name="query" required>
+            <button name="btnAsk">Ask</button>
+        </div>
+    </form><br/>
+    {% if messages %}
+    <div class="answerbox">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+</body>
+</html>
