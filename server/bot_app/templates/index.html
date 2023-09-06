@@ -1,39 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+        function refreshTable() {
+            $.ajax({
+                url: '{% url "refresh_data" %}',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    // Assuming your table has an ID of 'data-table'
+                    $('#data-table').html(''); // Clear the table body
+                    $.each(data, function(index, item) {
+                        // Append each row to the table
+                        $('#data-table').append(
+                            '<tr>' +
+                            '<td>' + item.question_text + '</td>' +
+                            '<td>' + item.query_response + '</td>' +
+                            '<td>' + item.timestamp + '</td>' +
+                            '</tr>'
+                        );
+                    });
+                },
+                error: function() {
+                    console.error('Failed to refresh data.');
+                }
+            });
+        }
+
+        $('#queryBtn').click(function(){
+            refreshTable();
+        })
+
+        setInterval(refreshTable, 5000); // refresh the table every 5 seconds.
+    </script>
     <meta charset="UTF-8">
     <style>
         h1{
             text-align: center;
-            color: black;
+            color: #545F71;
         }
         .queryBox{
             text-align: center;
-            color: green;
+            color: #545F71;
         }
         .answerbox{
             text-align: center;
-            color: black;
+            color: #545F71;
         }
     </style>
     <title>Chat Bot</title>
 
 </head>
 <body>
+        <table>
+            <tbody id="data-table">
+            </tbody>
+        </table>
+
     <h1>Ask away</h1>
     <form method="post">
         {% csrf_token %}
         <div class="queryBox">
             <input name="query" required>
-            <button name="btnAsk">Ask</button>
+            <button name="btnAsk" id="queryBtn">Ask</button>
         </div>
     </form><br/>
-    {% if messages %}
-    <div class="answerbox">
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
-    </div>
-    {% endif %}
+<!--    {% if messages %}-->
+<!--    <div class="answerbox">-->
+<!--        {% for message in messages %}-->
+<!--            {{ message }}-->
+<!--        {% endfor %}-->
+<!--    </div>-->
+<!--    {% endif %}-->
 </body>
 </html>
