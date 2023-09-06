@@ -16,10 +16,9 @@
                     $.each(data, function(index, item) {
                         // Append each row to the table
                         $('#data-table').append(
-                            '<tr>' +
-                            '<td>' + item.question_text + '</td>' +
-                            '<td>' + item.query_response + '</td>' +
-                            '<td>' + item.timestamp + '</td>' +
+                            '<tr class=\"chat-bubble\">' +
+                            '<td>' + item.question_text + '</td></tr>' +
+                            '<tr class=\"bot-bubble\"><td>' + item.query_response + '</td></tr>' +
                             '</tr>'
                         );
                     });
@@ -38,24 +37,81 @@
     </script>
     <meta charset="UTF-8">
     <style>
+        body {
+            margin: 20px;
+        }
         h1{
             text-align: center;
             color: #545F71;
         }
-        .queryBox{
-            text-align: center;
-            color: #545F71;
+        .chat-container {
+          width: 100%;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
         }
-        .answerbox{
-            text-align: center;
-            color: #545F71;
+
+        /* Individual chat bubbles */
+        .chat-bubble {
+          float: left;
+          background-color: #007bff;
+          color: #fff;
+          clear: both;
+          padding: 10px;
+          margin: 10px;
+          border-radius: 10px;
+          font-size: 16px;
+          max-width: 80%;
+        }
+        /* Bot's chat bubble */
+        .bot-bubble {
+          float: left;
+          background-color: #f1f1f1;
+          color: #333;
+          clear: both;
+          padding: 10px;
+          margin: 10px;
+          border-radius: 10px;
+          font-size: 16px;
+          max-width: 80%;
+        }
+        /* Chat input box */
+        .chat-input {
+          width: 80%;
+          border: 1px solid #ccc;
+          padding: 10px 20px;
+          border-radius: 5px;
+          font-size: 16px;
+        }
+
+        /* Send button */
+        .send-button {
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          padding: 10px 20px;
+          font-size: 16px;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+        /* Send button hover effect */
+        .send-button:hover {
+          background-color: #0056b3;
+        }
+
+        .queryBox{
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
         }
     </style>
     <title>Chat Bot</title>
 
 </head>
 <body>
-        <table>
+        <table class="chat-container">
             <tbody id="data-table">
             </tbody>
         </table>
@@ -64,16 +120,9 @@
     <form method="post">
         {% csrf_token %}
         <div class="queryBox">
-            <input name="query" required>
-            <button name="btnAsk" id="queryBtn">Ask</button>
+            <input class="chat-input" name="query" required>
+            <button class="send-button"name="btnAsk" id="queryBtn">Ask</button>
         </div>
     </form><br/>
-<!--    {% if messages %}-->
-<!--    <div class="answerbox">-->
-<!--        {% for message in messages %}-->
-<!--            {{ message }}-->
-<!--        {% endfor %}-->
-<!--    </div>-->
-<!--    {% endif %}-->
 </body>
 </html>
