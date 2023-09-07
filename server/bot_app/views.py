@@ -26,8 +26,7 @@ def index(request):
             queries = UserQueries(question_text=query_txt, query_response=response, user_id=user,
                                   timestamp=timezone.now())
             queries.save()
-            query_response = queries.values('question_text', 'query_response')
-            messages.success(request, query_response)
+            messages.success(request, queries)
     # if request.method == "GET":
     username = request.session["username"]
     user = User.objects.get(name=username)

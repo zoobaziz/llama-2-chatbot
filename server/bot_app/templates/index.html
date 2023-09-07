@@ -81,19 +81,19 @@
         <table class="chat-container">
             <tbody id="data-table">
                 {% for item in data %}
-                <tr class=\"chat-bubble\">
+                <tr class="chat-bubble">
                     <td>{{ item.question_text }}</td>
                 </tr>
-                <tr class=\"bot-bubble\">
+                <tr class="bot-bubble">
                     <td>{{item.query_response}}</td>
                 </tr>
                 {% endfor %}
-                {% if messages %}
-                    {% for message in messages %}
-                    <tr class=\"chat-bubble\">
+                {% if queries %}
+                    {% for message in queries %}
+                    <tr class="chat-bubble">
                         <td>{{ message.question_text }}</td>
                     </tr>
-                    <tr class=\"bot-bubble\">
+                    <tr class="bot-bubble">
                         <td>{{ message.query_response }}</td>
                     </tr>
                     {% endfor %}
