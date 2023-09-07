@@ -2,39 +2,6 @@
 <html lang="en">
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-
-        function refreshTable() {
-            $.ajax({
-                url: '{% url "refresh_data" %}',
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    console.log(data);
-                    // Assuming your table has an ID of 'data-table'
-                    $('#data-table').html(''); // Clear the table body
-                    $.each(data, function(index, item) {
-                        // Append each row to the table
-                        $('#data-table').append(
-                            '<tr class=\"chat-bubble\">' +
-                            '<td>' + item.question_text + '</td></tr>' +
-                            '<tr class=\"bot-bubble\"><td>' + item.query_response + '</td></tr>' +
-                            '</tr>'
-                        );
-                    });
-                },
-                error: function() {
-                    console.error('Failed to refresh data.');
-                }
-            });
-        }
-
-        $('#queryBtn').click(function(){
-            refreshTable();
-        })
-
-        setInterval(refreshTable, 5000); // refresh the table every 5 seconds.
-    </script>
     <meta charset="UTF-8">
     <style>
         body {
@@ -113,6 +80,25 @@
 <body>
         <table class="chat-container">
             <tbody id="data-table">
+                {% for item in data %}
+                <tr class=\"chat-bubble\">
+                    <td>{{ item.question_text }}</td>
+                </tr>
+                <tr class=\"bot-bubble\">
+                    <td>{{item.query_response}}</td>
+                </tr>
+                {% endfor %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <tr class=\"chat-bubble\">
+                        <td>{{ message.question_text }}</td>
+                    </tr>
+                    <tr class=\"bot-bubble\">
+                        <td>{{ message.query_response }}</td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+
             </tbody>
         </table>
 

@@ -27,4 +27,5 @@ class UserQueries(models.Model):
     timestamp = models.TimeField(null=True)
 
     def __str__(self):
-        return self.question_text, self.user_id, self.timestamp, self.query_response
+        return self.question_text
+        # , self.user_id, self.timestamp, self.query_response

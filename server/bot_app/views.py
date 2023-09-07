@@ -18,15 +18,22 @@ def index(request):
     if request.method == "POST":
         query = QueryForm(request.POST)
         if query.is_valid():
-            queryTxt = query.cleaned_data["query"]
-            prompt = "Q: " + queryTxt + "? A:"
+            query_txt = query.cleaned_data["query"]
+            prompt = "Q: " + query_txt + "? A:"
             output = llama(prompt)
             response = output["choices"][0]["text"]
             user: User = User.objects.get(name=request.session["username"])
-            queries = UserQueries(question_text=queryTxt, query_response=response, user_id=user, timestamp=timezone.now())
+            queries = UserQueries(question_text=query_txt, query_response=response, user_id=user,
+                                  timestamp=timezone.now())
             queries.save()
-            # messages.success(request, response)
-    return render(request, 'index.html')
+            query_response = queries.values('question_text', 'query_response')
+            messages.success(request, query_response)
+    # if request.method == "GET":
+    username = request.session["username"]
+    user = User.objects.get(name=username)
+    data = UserQueries.objects.filter(user_id=user).values('question_text', 'query_response')
+    return render(request, 'index.html', {'data': data})
+    # return render(request, 'index.html')
 
 
 def refresh_data(request):
@@ -36,6 +43,7 @@ def refresh_data(request):
         data = UserQueries.objects.filter(user_id=user).values('question_text', 'query_response', 'timestamp')
         # print(data)
         return JsonResponse(list(data), safe=False)
+
 
 def signin(request):
     if request.method == "POST":
