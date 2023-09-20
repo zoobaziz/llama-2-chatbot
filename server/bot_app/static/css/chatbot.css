@@ -1,0 +1,134 @@
+body {
+    margin: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: black;
+}
+h1{
+    text-align: center;
+    color: black;
+}
+
+.chatbox{
+  background-color: white;
+}
+
+.loadingDiv{
+  display: none;
+  justify-content: cneter;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  color: #545F71;
+  font-size: 20px;
+}
+
+.chat-container {
+  width: 100%;
+  max-width: 600px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* tr, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+} */
+
+/* Individual chat bubbles */
+.chat-bubble {
+  float: left;
+  background-color: #26e415;
+  color: black;
+  clear: both;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  font-size: 16px;
+  /* max-width: 80%; */
+}
+/* Bot's chat bubble */
+.bot-bubble {
+  float: left;
+  background-color: #f1f1f1;
+  color: #333;
+  clear: both;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  font-size: 16px;
+  /* max-width: 80%; */
+}
+/* Chat input box */
+.chat-input {
+  width: 80%;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Send button */
+.send-button {
+  background-color: #26e415;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Send button hover effect */
+.send-button:hover {
+  background-color: #228819;
+}
+
+.queryBox{
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+.loading-container {
+  /* width: 100%;
+  height: 100vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CSS for the loading animation */
+.loading {
+  border: 6px solid #f3f3f3; /* Light gray border */
+  border-top: 6px solid #2eb621; /* Blue border */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite; /* Animation properties */
+}
+
+/* CSS for the text */
+.loading-text {
+  font-size: 18px;
+  margin-left: 10px; /* Adjust this for spacing */
+}
+
+/* Keyframes for the loading animation */
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
