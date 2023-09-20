@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <title>Sign-up</title>
 </head>
 <body>
-    <h1>Create an account</h1>
-    </br>
-    <div>
-        Enter your account details below or <a href="login.html">log in</a>
-    </div>
-    <form method="POST">
-        {% csrf_token %}
-        <div class="signup">
-            Username</br>
-            <textarea name="username" enterkeyhint="Enter your username"/></br>
-            Password</br>
-            <input name="password" type="password"></br>
-            <button name="signin">Sign In</button>
+    <div class="welcome">
+        <h1>Create an account</h1>
+        </br>
+        <div class="headline">
+            Enter your account details below or <a href="/bot/">log in</a></br></br>
         </div>
-    </form>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="loginBox">
+                <div class="lblUsr">Username</div></br>
+                <input class="username" type="text" name="username" enterkeyhint="Enter your username"/> </br></br>
+                <div class="lblPwd">Password</div></br>
+                <input class="password" name="password" type="password"/></br></br>
+                <button class="signin" name="signin">Sign Up</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
